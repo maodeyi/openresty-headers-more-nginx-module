@@ -45,7 +45,6 @@ static ngx_command_t  ngx_http_headers_more_filter_commands[] = {
       NGX_HTTP_LOC_CONF_OFFSET,
       0,
       NULL},
-
     { ngx_string("more_clear_headers"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF
                         |NGX_CONF_1MORE,

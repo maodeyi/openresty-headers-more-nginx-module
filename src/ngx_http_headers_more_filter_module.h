@@ -15,6 +15,7 @@
 
 typedef enum {
     ngx_http_headers_more_opcode_set,
+    ngx_http_headers_more_opcode_append,
     ngx_http_headers_more_opcode_clear
 } ngx_http_headers_more_opcode_t;
 
