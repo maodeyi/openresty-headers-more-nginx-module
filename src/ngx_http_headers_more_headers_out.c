@@ -237,9 +237,10 @@ matched:
 			    return NGX_ERROR;
 			}
   
-	      //	ngx_memset(strcat,'\0', h[i].value.len + (*value).len + 1);	
-			ngx_memcpy(strcat, h[i].value.data, h[i].value.len);
-			ngx_memmove(strcat +  h[i].value.len, (*value).data, (*value).len);
+	      //	ngx_memset(strcat,'\0', h[i].value.len + (*value).len + 1);
+		        ngx_memcpy(strcat,(*value).data, (*value).len);
+			//ngx_memcpy(strcat, h[i].value.data, h[i].value.len);
+			ngx_memmove(strcat +  (*value), h[i].value.data, h[i].value.len);
 			
 		   
 
