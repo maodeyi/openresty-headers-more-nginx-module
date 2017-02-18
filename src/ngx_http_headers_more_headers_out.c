@@ -232,7 +232,20 @@ matched:
             h[i].hash = 0;
 
         } else {
-            h[i].value = *value;
+            u_char *strcat  = ngx_pnalloc(r->pool, h[i].value.len + (*value).len + 1);
+			if (strcat == NULL) {
+			    return NGX_ERROR;
+			}
+  
+	      //	ngx_memset(strcat,'\0', h[i].value.len + (*value).len + 1);	
+			ngx_memcpy(strcat, h[i].value.data, h[i].value.len);
+			ngx_memmove(strcat +  h[i].value.len, (*value).data, (*value).len);
+			
+		   
+
+		    ngx_str_t strcat_value = ngx_string(strcat);
+		    strcat_value.len =  h[i].value.len + (*value).len;
+            h[i].value = strcat_value;
             h[i].hash = hv->hash;
         }
 
@@ -317,8 +330,12 @@ ngx_http_set_builtin_header(ngx_http_request_t *r,
 
     h->hash = hv->hash;
     h->key = hv->key;
-    h->value = *value;
+	dd("clearing the builtin header");
 
+	ngx_str_t  w = ngx_string("test");
+    h->value = w;
+
+	
     return NGX_OK;
 }
 
@@ -501,6 +518,7 @@ ngx_http_headers_more_set_headers(ngx_conf_t *cf,
     return ngx_http_headers_more_parse_directive(cf, cmd, conf,
                                          ngx_http_headers_more_opcode_set);
 }
+
 
 
 char *
