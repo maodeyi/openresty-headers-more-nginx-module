@@ -232,22 +232,26 @@ matched:
             h[i].hash = 0;
 
         } else {
-            u_char *strcat  = ngx_pnalloc(r->pool, h[i].value.len + (*value).len + 1);
-			if (strcat == NULL) {
-			    return NGX_ERROR;
-			}
-  
-	      //	ngx_memset(strcat,'\0', h[i].value.len + (*value).len + 1);
-		        ngx_memcpy(strcat,(*value).data, (*value).len);
-			//ngx_memcpy(strcat, h[i].value.data, h[i].value.len);
-			ngx_memmove(strcat +  (*value).len, h[i].value.data, h[i].value.len);
-			
-		   
+            
+   	                if（h[i].value.len == 0）{
+				h[i].value = *value;
+				h[i].hash = hv->hash;
+			}else{
+				u_char *strcat  = ngx_pnalloc(r->pool, h[i].value.len + (*value).len + 3);
+				if (strcat == NULL) {
+				    return NGX_ERROR;
+				}
+				ngx_memcpy(strcat,(*value).data, (*value).len);
+				ngx_memmove(stract + (*value).len, ", ", 2);
+				ngx_memmove(strcat +  (*value).len + 2, h[i].value.data, h[i].value.len);
 
-		    ngx_str_t strcat_value = ngx_string(strcat);
-		    strcat_value.len =  h[i].value.len + (*value).len;
-            h[i].value = strcat_value;
-            h[i].hash = hv->hash;
+			       ngx_str_t strcat_value = ngx_string(strcat);
+			       strcat_value.len =  h[i].value.len + (*value).len + 2;
+		    	       h[i].value = strcat_value;
+		               h[i].hash = hv->hash;
+			}
+		
+		        
         }
 
         if (output_header) {
