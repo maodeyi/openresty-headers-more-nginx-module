@@ -232,11 +232,10 @@ matched:
             h[i].hash = 0;
 
         } else {
-            
-   	                if（h[i].value.len == 0）{
-				h[i].value = *value;
-				h[i].hash = hv->hash;
-			}else{
+		if(h[i].value.len == 0){
+			h[i].value = (*value);
+			h[i].hash = hv->hash;
+		}else{
 				u_char *strcat  = ngx_pnalloc(r->pool, h[i].value.len + (*value).len + 3);
 				if (strcat == NULL) {
 				    return NGX_ERROR;
