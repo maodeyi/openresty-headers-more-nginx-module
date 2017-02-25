@@ -242,7 +242,7 @@ matched:
 				    return NGX_ERROR;
 				}
 				ngx_memcpy(strcat,(*value).data, (*value).len);
-				ngx_memmove(stract + (*value).len, ", ", 2);
+				ngx_memmove(strcat + (*value).len, ", ", 2);
 				ngx_memmove(strcat +  (*value).len + 2, h[i].value.data, h[i].value.len);
 
 			       ngx_str_t strcat_value = ngx_string(strcat);
