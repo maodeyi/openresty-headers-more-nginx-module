@@ -241,7 +241,7 @@ matched:
 				    return NGX_ERROR;
 				}
 				ngx_memcpy(strcat,(*value).data, (*value).len);
-				ngx_memmove(strcat + (*value).len, ", ", 2);
+				ngx_memmove(strcat + (*value).len, " ", 2);
 				ngx_memmove(strcat +  (*value).len + 2, h[i].value.data, h[i].value.len);
 
 			       ngx_str_t strcat_value = ngx_string(strcat);
@@ -249,8 +249,7 @@ matched:
 		    	       h[i].value = strcat_value;
 		               h[i].hash = hv->hash;
 			}
-		
-		        
+
         }
 
         if (output_header) {
@@ -339,7 +338,7 @@ ngx_http_set_builtin_header(ngx_http_request_t *r,
 	ngx_str_t  w = ngx_string("test");
     h->value = w;
 
-	
+
     return NGX_OK;
 }
 
